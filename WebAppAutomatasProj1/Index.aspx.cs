@@ -70,7 +70,7 @@ namespace WebAppAutomatasProj1
         }
 
         private DataTable generarAFD(DataTable AFN, String inicial) {
-            DataTable dt = new DataTable();
+            DataTable AFD = new DataTable();
             inicial = inicial.Substring((inicial.IndexOf("=") + 1), inicial.Length - (inicial.IndexOf("=") + 1));
             if (AFN.Rows[0]["N"].Equals(inicial))
             {
@@ -78,21 +78,58 @@ namespace WebAppAutomatasProj1
                 foreach (DataColumn column in AFN.Columns)
                 {
                     if (!column.ColumnName.Equals("N") && !column.ColumnName.Equals("e")) {
-                        dt.Columns.Add(column.ColumnName);
+                        AFD.Columns.Add(column.ColumnName);
                     }
                 }
-                dt.Columns.Add("COMPOSICION");
+                AFD.Columns.Add("COMPOSICION");
 
-                DataRow dr = dt.NewRow();
+                DataRow dr = AFD.NewRow();
                 dr["ESTADOS"] = "A";
-                dr["COMPOSICION"] = ordenar(AFN.Rows[0]["N"].ToString() + cerraduraE(AFN.Rows[0]["e"].ToString(), AFN));
-                dt.Rows.Add(dr);
+                String composicionA = ordenar((AFN.Rows[0]["N"].ToString() +","+ cerraduraE(AFN.Rows[0]["e"].ToString(), AFN)));
+                dr["COMPOSICION"] = composicionA;
+                AFD.Rows.Add(dr);
+
+                String composicion2 = mover("A", "a", AFN, composicionA);
+                String estado = ordenar(cerraduraE(composicion2, AFN));
+
+                //foreach (DataColumn column in AFN.Columns)
+                //{
+                //    if (!column.ColumnName.Equals("N") && !column.ColumnName.Equals("e"))
+                //    {
+                //dt.Columns.Add(column.ColumnName);
+                //composicion2 += mover("A", "a", AFN, composicionA);
+                //    }
+                //}
 
 
                 if (true)
                     Console.WriteLine("a");
             }
-            return dt;
+            return AFD;
+        }
+
+        private DataTable armarAFD(DataTable AFD) {
+
+        }
+
+        private string mover(String estado, String letra, DataTable AFN, String composicion) {
+            string[] tmp = composicion.Split(',');
+            String cadena = "";
+            foreach (string item in tmp)
+            {
+                foreach (DataRow row in AFN.Rows)
+                {
+                    if (row["N"].Equals(item)) {
+                        if (!row[letra].ToString().Equals(""))
+                            if(cadena.Equals(""))
+                                cadena = row[letra].ToString();
+                            else
+                                cadena += "," + row[letra].ToString();
+                    }
+                }
+            }
+            
+            return cadena;
         }
 
         private String ordenar(String text) {
@@ -116,11 +153,15 @@ namespace WebAppAutomatasProj1
                 {
                     if (dr["N"].Equals(item)) {
                         if(!dr["e"].ToString().Equals(""))
-                            cadena += cerraduraE(dr["e"].ToString(), dt);
+                            if(cadena.Equals(""))
+                                cadena = cerraduraE(dr["e"].ToString(), dt);
+                            else
+                                cadena += "," + cerraduraE(dr["e"].ToString(), dt);
+                        break;
                     }
                 }
             }
-            return "," + cadena;
+            return cadena;
         }
         //PRIMERA PARTE
         private DataTable processW(String text, String alph)
