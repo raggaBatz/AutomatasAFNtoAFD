@@ -110,20 +110,48 @@
                             <div class="md-form">
                                 <i class="fa fa-wikipedia-w"></i>
                                 <label>AFN</label>
-                                <asp:GridView ID="gvAFN" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="True" DataKeyNames="N" EmptyDataText="There are no data records to display.">
+                                <asp:Panel ID="panel1" runat="server" Height="285px" Width="100%" ScrollBars="Vertical">
+                                    <asp:GridView ID="gvAFN" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="True" DataKeyNames="N" EmptyDataText="There are no data records to display.">
                                     <HeaderStyle CssClass="thead-custom"/>
                                 </asp:GridView>
+                                </asp:Panel>
                             </div>
                         </div>
                     </div>
                     <div class="row" runat="server" id="divSecondary" visible="false">
-                        <div class="col-sm-3">
+                        <div class="col-sm-5">
                             <div class="md-form">
                                 <i class="fa fa-wikipedia-w"></i>
                                 <label>AFD</label>
-                                <asp:GridView ID="gvAFD" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="True" DataKeyNames="ESTADO" EmptyDataText="There are no data records to display.">
+                                <asp:Panel ID="panel2" runat="server" Height="285px" ScrollBars="Vertical">
+                                    <asp:GridView ID="gvAFD" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="True" DataKeyNames="ESTADO" EmptyDataText="There are no data records to display.">
+                                        <HeaderStyle CssClass="thead-custom"/>
+                                    </asp:GridView>
+                                </asp:Panel>
+                                <%--<asp:GridView ID="gvAFD" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="True" DataKeyNames="ESTADO" EmptyDataText="There are no data records to display.">
                                     <HeaderStyle CssClass="thead-custom"/>
-                                </asp:GridView>
+                                </asp:GridView>--%>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="md-form">
+                                <i class="fa fa-file-o"></i>
+                                <label>t</label>
+                                <textarea id="Textarea1" runat="server" class="md-textarea form-control" rows="10" readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="md-form">
+                                <i class="fa fa-file-o"></i>
+                                <label>t</label>
+                                <textarea id="Textarea2" runat="server" class="md-textarea form-control" rows="10" readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="md-form">
+                                <i class="fa fa-file-o"></i>
+                                <label>t</label>
+                                <textarea id="Textarea3" runat="server" class="md-textarea form-control" rows="10" readonly="readonly"></textarea>
                             </div>
                         </div>
                     </div>

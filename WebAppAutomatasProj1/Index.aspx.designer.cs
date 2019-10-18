@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebAppAutomatasProj1 {
-    
-    
-    public partial class Index {
-        
+namespace WebAppAutomatasProj1
+{
+
+
+    public partial class Index
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// file control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputFile file;
-        
+
         /// <summary>
         /// btnLoadFile control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnLoadFile;
-        
+
         /// <summary>
         /// divPrimary control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPrimary;
-        
+
         /// <summary>
         /// taTXT control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea taTXT;
-        
+
         /// <summary>
         /// taQ control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea taQ;
-        
+
         /// <summary>
         /// taF control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea taF;
-        
+
         /// <summary>
         /// taA control.
         /// </summary>
@@ -83,7 +85,16 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea taA;
-        
+
+        /// <summary>
+        /// panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel1;
+
         /// <summary>
         /// gvAFN control.
         /// </summary>
@@ -92,7 +103,7 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvAFN;
-        
+
         /// <summary>
         /// divSecondary control.
         /// </summary>
@@ -101,7 +112,16 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSecondary;
-        
+
+        /// <summary>
+        /// panel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel2;
+
         /// <summary>
         /// gvAFD control.
         /// </summary>
@@ -110,5 +130,32 @@ namespace WebAppAutomatasProj1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvAFD;
+
+        /// <summary>
+        /// Textarea1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea Textarea1;
+
+        /// <summary>
+        /// Textarea2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea Textarea2;
+
+        /// <summary>
+        /// Textarea3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea Textarea3;
     }
 }
