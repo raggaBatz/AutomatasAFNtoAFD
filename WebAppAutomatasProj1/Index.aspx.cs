@@ -117,7 +117,7 @@ namespace WebAppAutomatasProj1
                     {
                         //AFD.Columns.Add(column.ColumnName);
                         //String composicion2 = mover("A", "a", AFN, composicionA);
-                        String composicion = ordenar(cerraduraE(mover(AFD.Rows[i]["ESTADO"].ToString(), column.ColumnName, AFN, AFD.Rows[i]["COMPOSICION"].ToString()), AFN));
+                        String composicion = ordenar(cerraduraE(mover(column.ColumnName, AFN, AFD.Rows[i]["COMPOSICION"].ToString()), AFN));
                         bool flag = false;
                         string lastLetter = "";
                         foreach (DataRow r in AFD.Rows)
@@ -158,7 +158,7 @@ namespace WebAppAutomatasProj1
             return next.ToString();
         }
 
-        private string mover(String estado, String letra, DataTable AFN, String composicion) {
+        private string mover(String letra, DataTable AFN, String composicion) {
             string[] tmp = composicion.Split(',');
             String cadena = "";
             foreach (string item in tmp)
