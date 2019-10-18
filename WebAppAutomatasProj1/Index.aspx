@@ -121,7 +121,7 @@
                             <div class="md-form">
                                 <i class="fa fa-wikipedia-w"></i>
                                 <label>AFD</label>
-                                <asp:GridView ID="gvAFD" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="True" DataKeyNames="N" EmptyDataText="There are no data records to display.">
+                                <asp:GridView ID="gvAFD" runat="server" Width="100%" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="True" DataKeyNames="ESTADO" EmptyDataText="There are no data records to display.">
                                     <HeaderStyle CssClass="thead-custom"/>
                                 </asp:GridView>
                             </div>
