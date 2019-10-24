@@ -30,14 +30,53 @@ namespace WebAppAutomatasProj1
             }
         }
 
+        protected void btnValidarCadena_Click(object sender, EventArgs e)
+        {
+            if (!tbxCadena.Text.Equals("")) {
+                String val = "";
+                bool flag = false;
+                DataTable GlobalAFD = new DataTable();
+                GlobalAFD = (DataTable)Session["GlobalAFD"];
+                foreach (char ch in tbxCadena.Text.ToCharArray())
+                {
+                    String l = String.Format(ch.ToString());
+                    foreach (DataRow row in GlobalAFD.Rows) {
+                        if (!flag) {
+                            val = row[l].ToString();
+                            flag = true;
+                        }
+                        else 
+                        {
+                            if(row["Estado"].ToString().Equals(val)) 
+                            {
+                                val = row[l].ToString();
+                                break;
+                            }
+                        }
+                    }
+                }
+                String aceptacion = (String)Session["A"];
+                if (aceptacion.Contains(val))
+                {
+                    string script = "alert(\"CADENA DE ACEPTACION\");";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+                }
+                else 
+                {
+                    string script = "alert(\"NO ES CADENA DE ACEPTACION\");";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+                }
+            }
+        }
+
         private void parseInfo(String text)
         {
             //PRIMERA PARTE
             String Q = text.Substring(0, text.IndexOf("F"));
-            if (Q.Contains("\n"))
-                Q = Q.Substring(0, (Q.Length - 1));
             if (Q.Contains("\r\n"))
                 Q = Q.Substring(0, (Q.Length - 2));
+            if (Q.Contains("\n"))
+                Q = Q.Substring(0, (Q.Length - 1));
             String F = text.Substring(text.IndexOf("F"), text.IndexOf("i") - text.IndexOf("F"));
             if (F.Contains("\r\n"))
                 F = F.Substring(0, (F.Length - 2));
@@ -78,7 +117,57 @@ namespace WebAppAutomatasProj1
             AFD = generarAFD(AFN, I);
             gvAFD.DataSource = AFD;
             gvAFD.DataBind();
+            Session["GlobalAFD"] = AFD;
+            generarQuintuplaAFD(A,AFD);
+        }
 
+        private void generarQuintuplaAFD(String aceptacion, DataTable AFD) {
+            String i = "";
+            String F = "";
+            String Q = "";
+            String A = "";
+
+            aceptacion = aceptacion.Substring((aceptacion.IndexOf("{") + 1), aceptacion.IndexOf("}") - (aceptacion.IndexOf("{") + 1));
+            String[] aceptacionArray = aceptacion.Split(',');
+            foreach (DataColumn column in AFD.Columns) 
+            {
+                if (!column.ColumnName.Equals("ESTADO") && !column.ColumnName.Equals("COMPOSICION"))
+                    if (F.Equals(""))
+                        F = column.ColumnName;
+                    else
+                        F += "," + column.ColumnName;
+                
+            }
+            foreach (DataRow row in AFD.Rows) 
+            {
+                if (Q.Equals(""))
+                    Q += row["ESTADO"];
+                else
+                    Q += "," + row["ESTADO"];
+                foreach (String estado in aceptacionArray) 
+                {
+                    String[] composicion = row["COMPOSICION"].ToString().Split(',');
+                    foreach (String elemento in composicion) {
+                        if (estado.Equals(elemento)) {
+                            if (A.Equals(""))
+                                A += row["ESTADO"];
+                            else
+                                A += ","+row["ESTADO"];
+                        }
+                    };
+                }
+
+            }
+
+            Session["A"] = A;
+            i = String.Format("i={0}", AFD.Rows[0][0]);
+            F = String.Format("F={{{0}}}",F);
+            Q = String.Format("Q={{{0}}}",Q);
+            A = String.Format("A={{{0}}}",A);
+            taQuintupla.InnerText += Q + Environment.NewLine;
+            taQuintupla.InnerText += F + Environment.NewLine;
+            taQuintupla.InnerText += i + Environment.NewLine;
+            taQuintupla.InnerText += A + Environment.NewLine;
         }
 
         private DataTable generarAFD(DataTable AFN, String inicial) {
@@ -117,7 +206,11 @@ namespace WebAppAutomatasProj1
                     {
                         //AFD.Columns.Add(column.ColumnName);
                         //String composicion2 = mover("A", "a", AFN, composicionA);
-                        String composicion = ordenar(cerraduraE(mover(column.ColumnName, AFN, AFD.Rows[i]["COMPOSICION"].ToString()), AFN));
+                        String composicion = ordenar(limpiar(cerraduraE(mover(column.ColumnName, AFN, AFD.Rows[i]["COMPOSICION"].ToString()), AFN)));
+                        if (composicion.Equals(""))
+                            composicion = "0";
+                        //composicion = limpiar(composicion);
+                        //composicion = ordenar(composicion);
                         bool flag = false;
                         string lastLetter = "";
                         foreach (DataRow r in AFD.Rows)
@@ -141,6 +234,15 @@ namespace WebAppAutomatasProj1
                 }
             }
             return AFD;
+        }
+
+        private String limpiar(String texto) 
+        {
+            String[] tmp = texto.Split(',');
+            tmp = tmp.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+            tmp = tmp.Distinct().ToArray();
+
+            return string.Join(",",tmp);
         }
 
         private string nextLetter(String value) {
@@ -179,31 +281,33 @@ namespace WebAppAutomatasProj1
         }
 
         private String ordenar(String text) {
-            string[] tmp = text.Split(',');
-            int quantity = tmp.Count();
-            //string numberStr = Console.ReadLine(); // "1 2 3 1 2 3 1 2 ...."
-            //string[] splitted = numberStr.Split(' ');
-            int[] nums = new int[tmp.Length];
-
-            for (int i = 0; i < tmp.Length; i++)
+            if (text.Contains(","))
             {
-                nums[i] = int.Parse(tmp[i]);
-            }
+                string[] tmp = text.Split(',');
+                int quantity = tmp.Count();
+                int[] nums = new int[tmp.Length];
 
-            Comparison<int> comparador = new Comparison<int>((numero1, numero2) => numero1.CompareTo(numero2));
-            // Llamar a Array.Sort, pasando el arreglo a ordenar y el comparador
-            Array.Sort<int>(nums, comparador);
-            // Ahora simplemente imprimimos
-            int pos = -1;
-            tmp = new string[quantity];
-            foreach (int numero in nums)
-            {
-                pos++;
-                tmp[pos] = numero.ToString();
-                
+                for (int i = 0; i < tmp.Length; i++)
+                {
+                    nums[i] = int.Parse(tmp[i]);
+                }
+
+                Comparison<int> comparador = new Comparison<int>((numero1, numero2) => numero1.CompareTo(numero2));
+                Array.Sort<int>(nums, comparador);
+                int pos = -1;
+                tmp = new string[quantity];
+                foreach (int numero in nums)
+                {
+                    pos++;
+                    tmp[pos] = numero.ToString();
+
+                }
+                return String.Join(",", tmp);
             }
-            //Array.Sort(tmp);
-            return String.Join(",",tmp);
+            else 
+            {
+                return text;
+            }
         }
 
         private String cerraduraE(String cadena, DataTable dt) {
@@ -266,7 +370,10 @@ namespace WebAppAutomatasProj1
                     if (line[0].Equals(row["N"]))
                     {
                         bandera = true;
-                        row[line[1]] += "," + line[2];
+                        if(row[line[1]].ToString().Equals(""))
+                            row[line[1]] = line[2];
+                        else
+                            row[line[1]] += "," + line[2];
                     }
                 }
                 if (!bandera)

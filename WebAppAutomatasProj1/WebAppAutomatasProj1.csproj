@@ -149,6 +149,7 @@
     <Content Include="lib\wow\wow.min.js" />
     <Content Include="res\1.jpeg" />
     <Content Include="res\2.jpeg" />
+    <Content Include="res\Archivo 2.txt" />
     <Content Include="res\DATA.txt" />
     <Content Include="res\file.txt" />
     <Content Include="res\umg.ico" />

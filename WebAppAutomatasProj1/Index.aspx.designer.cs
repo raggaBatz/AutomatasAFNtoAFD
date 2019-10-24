@@ -132,30 +132,30 @@ namespace WebAppAutomatasProj1
         protected global::System.Web.UI.WebControls.GridView gvAFD;
 
         /// <summary>
-        /// Textarea1 control.
+        /// taQuintupla control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea Textarea1;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea taQuintupla;
 
         /// <summary>
-        /// Textarea2 control.
+        /// tbxCadena control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea Textarea2;
+        protected global::System.Web.UI.WebControls.TextBox tbxCadena;
 
         /// <summary>
-        /// Textarea3 control.
+        /// btnValidarCadena control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea Textarea3;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnValidarCadena;
     }
 }

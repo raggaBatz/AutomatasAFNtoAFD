@@ -30,22 +30,6 @@
     <link rel="icon" href="res/umg.ico" type="image/x-icon"/>
 </head>
 <body>
-    <%--<header id="header">
-        <div class="container">
-            <div class="logo float-left">
-                <h1 class="text-light"><a href="#" class="scrollto"><span>AUTOMATAS</span></a></h1>
-            </div>
-            <%--<nav class="main-nav float-right d-none d-lg-block">
-            <nav class="navbar navbar-default">
-                <ul>
-                    <li class="active"><a href="#">ERICK RICARDO BATZ CUSCUL</a></li>
-                    <li><a href="#">090 14 4920</a></li>
-                    <li><a href="#">Sección A</a></li>
-            
-                </ul>
-            </nav>
-        </div>
-    </header>--%>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="#">
@@ -136,22 +120,21 @@
                         <div class="col-sm-2">
                             <div class="md-form">
                                 <i class="fa fa-file-o"></i>
-                                <label>t</label>
-                                <textarea id="Textarea1" runat="server" class="md-textarea form-control" rows="10" readonly="readonly"></textarea>
+                                <label>Quintupla</label>
+                                <textarea id="taQuintupla" runat="server" class="md-textarea form-control" rows="10" readonly="readonly"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="md-form">
-                                <i class="fa fa-file-o"></i>
-                                <label>t</label>
-                                <textarea id="Textarea2" runat="server" class="md-textarea form-control" rows="10" readonly="readonly"></textarea>
+                                <%--<i class="fa fa-file-o"></i>--%>
+                                <asp:TextBox ID="tbxCadena" runat="server" CssClass="form-control input-lg" Width="100%" TabIndex="1"/>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="md-form">
-                                <i class="fa fa-file-o"></i>
-                                <label>t</label>
-                                <textarea id="Textarea3" runat="server" class="md-textarea form-control" rows="10" readonly="readonly"></textarea>
+                                <%--<i class="fa fa-file-o"></i>--%>
+                                <label>.</label>
+                                <button type="button" class="btn btn-info" id="btnValidarCadena" runat="server" onserverclick="btnValidarCadena_Click">Validar cadena</button>
                             </div>
                         </div>
                     </div>
