@@ -34,25 +34,26 @@ namespace WebAppAutomatasProj1
         {
             if (!tbxCadena.Text.Equals("")) {
                 String val = "";
-                bool flag = false;
                 DataTable GlobalAFD = new DataTable();
                 GlobalAFD = (DataTable)Session["GlobalAFD"];
+                val = GlobalAFD.Rows[0][0].ToString();
                 foreach (char ch in tbxCadena.Text.ToCharArray())
                 {
                     String l = String.Format(ch.ToString());
+                    //bool flag = false;
                     foreach (DataRow row in GlobalAFD.Rows) {
-                        if (!flag) {
-                            val = row[l].ToString();
-                            flag = true;
-                        }
-                        else 
-                        {
+                        //if (!flag) {
+                            //val = row[l].ToString();
+                            //flag = true;
+                        //}
+                        //else 
+                        //{
                             if(row["Estado"].ToString().Equals(val)) 
                             {
                                 val = row[l].ToString();
                                 break;
                             }
-                        }
+                        //}
                     }
                 }
                 String aceptacion = (String)Session["A"];
@@ -186,7 +187,16 @@ namespace WebAppAutomatasProj1
 
                 DataRow dr = AFD.NewRow();
                 dr["ESTADO"] = "A";
-                dr["COMPOSICION"] = ordenar((AFN.Rows[0]["N"].ToString() + "," + cerraduraE(AFN.Rows[0]["e"].ToString(), AFN)));
+                String e = cerraduraE(AFN.Rows[0]["e"].ToString(), AFN);
+                if (e.Equals(""))
+                {
+                    e = "0";
+                    dr["COMPOSICION"] = ordenar((AFN.Rows[0]["N"].ToString()));
+                }
+                else 
+                {
+                    dr["COMPOSICION"] = ordenar((AFN.Rows[0]["N"].ToString() + "," + e));
+                }
                 AFD.Rows.Add(dr);
 
                 AFD = armarComposiciones(AFD, AFN);
