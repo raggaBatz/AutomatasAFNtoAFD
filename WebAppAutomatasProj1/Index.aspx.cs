@@ -58,12 +58,12 @@ namespace WebAppAutomatasProj1
                 String aceptacion = (String)Session["A"];
                 if (aceptacion.Contains(val))
                 {
-                    string script = "alert(\"CADENA DE ACEPTACION\");";
+                    string script = String.Format("alert(\"{0} - Si es cadena de aceptacion!!!\");", tbxCadena.Text);
                     ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
                 }
                 else 
                 {
-                    string script = "alert(\"NO ES CADENA DE ACEPTACION\");";
+                    string script = String.Format("alert(\"{0} no es cadena de aceptacion\");", tbxCadena.Text);
                     ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
                 }
             }
@@ -186,8 +186,6 @@ namespace WebAppAutomatasProj1
 
                 DataRow dr = AFD.NewRow();
                 dr["ESTADO"] = "A";
-                //String composicionA = ordenar((AFN.Rows[0]["N"].ToString() +","+ cerraduraE(AFN.Rows[0]["e"].ToString(), AFN)));
-                //dr["COMPOSICION"] = composicionA;
                 dr["COMPOSICION"] = ordenar((AFN.Rows[0]["N"].ToString() + "," + cerraduraE(AFN.Rows[0]["e"].ToString(), AFN)));
                 AFD.Rows.Add(dr);
 
@@ -204,13 +202,9 @@ namespace WebAppAutomatasProj1
                 {
                     if (!column.ColumnName.Equals("ESTADO") && !column.ColumnName.Equals("COMPOSICION"))
                     {
-                        //AFD.Columns.Add(column.ColumnName);
-                        //String composicion2 = mover("A", "a", AFN, composicionA);
                         String composicion = ordenar(limpiar(cerraduraE(mover(column.ColumnName, AFN, AFD.Rows[i]["COMPOSICION"].ToString()), AFN)));
                         if (composicion.Equals(""))
                             composicion = "0";
-                        //composicion = limpiar(composicion);
-                        //composicion = ordenar(composicion);
                         bool flag = false;
                         string lastLetter = "";
                         foreach (DataRow r in AFD.Rows)
@@ -218,7 +212,6 @@ namespace WebAppAutomatasProj1
                             if (r["COMPOSICION"].Equals(composicion))
                             {
                                 flag = true;
-                                //row[column.ColumnName] = r["ESTADO"].ToString();
                                 AFD.Rows[i][column.ColumnName] = r["ESTADO"].ToString();
                             }
                             lastLetter = r["ESTADO"].ToString();
@@ -335,7 +328,7 @@ namespace WebAppAutomatasProj1
             }
             return cadena;
         }
-        //PRIMERA PARTE
+   
         private DataTable generarAFN(String text, String alph)
         {
             text = text.Substring((text.IndexOf("{") + 1), text.IndexOf("}") - (text.IndexOf("{") + 1));
